@@ -65,3 +65,45 @@ func CreateUser(c *gin.Context) {
 	c.JSON(http.StatusCreated, user)
 }
 
+func LoginUser(c *gin.Context) {
+	log.Println("User login attempt...")
+	var credentials struct {
+		Email    string `json:"email"`
+		Password string `json:"password"`
+	}
+
+	if err := c.ShouldBindJSON(&credentials); err != nil {
+		log.Println("Error binding JSON:", err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	var user models.User
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	err := userCollection.FindOne(ctx, bson.M{"email": credentials.Email}).Decode(&user)
+	if err != nil {
+		log.Println("Invalid email or password:", err)
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid email or password"})
+		return
+	}
+
+	// TODO: correct this
+	if utils.CheckPasswordHash(credentials.Password, user.Password) {
+		log.Println(credentials.Password, user.Password)
+		log.Println("Invalid email or password: Password mismatch")
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid email or password"})
+		return
+	}
+
+	token, err := utils.GenerateJWT(user.Email)
+	if err != nil {
+		log.Println("Error generating token:", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error while generating token"})
+		return
+	}
+
+	log.Println("User logged in successfully, token generated")
+	c.JSON(http.StatusOK, gin.H{"token": token})
+}
