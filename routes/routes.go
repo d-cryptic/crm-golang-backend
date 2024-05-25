@@ -19,6 +19,20 @@ func SetupRouter() *gin.Engine {
 		protected.GET("/users/:id", controllers.GetUserByID)
 		protected.PUT("/users/:id", controllers.UpdateUser)
 		protected.DELETE("/users/:id", controllers.DeleteUser)
+
+		protected.POST("/tickets", controllers.CreateTicket)
+		protected.PUT("/tickets/:id/resolve", controllers.ResolveTicket)
+		// TODO - create get interactions by customer id endpoint
+
+		protected.POST("/interactions", controllers.ScheduleInteraction)
+		protected.GET("/interactions/customer/:customer_id", controllers.GetInteractionsByCustomerID)
+
+		// Report endpoints
+    	protected.GET("/reports/customer-interactions", controllers.GenerateCustomerInteractionsReport)
+
+		// Email endpoints
+    	protected.POST("/send-email", controllers.SendEmail)
+    	protected.GET("/track/open", controllers.TrackOpen)
 	}
 
 	return router
