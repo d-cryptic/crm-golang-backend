@@ -149,3 +149,22 @@ This CRM (Customer Relationship Management) backend system is designed to handle
 
 ---
 
+### How to run
+
+```bash
+git clone https://github.com/d-cryptic/crm-golang-backend.git
+cd crm-golang-backend
+go mod tidy
+export MONGO_URI=
+export JWT_SECRET=
+export SMTP_HOST=smtp.gmail.com
+export SMTP_PORT=465
+export SMTP_USERNAME=example@gmail.com
+export SMTP_PASSWORD=
+export PORT=8000
+export SERVER_URL=http://localhost:8000
+go run main.go
+go tests ./...
+docker build -t crm-backend .
+docker run -p 8080:8080 crm-backend
+```
