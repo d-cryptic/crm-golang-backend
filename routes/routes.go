@@ -34,6 +34,10 @@ func SetupRouter() *gin.Engine {
 		// Email endpoints
     	protected.POST("/send-email", controllers.SendEmailHandler)
     	protected.GET("/track/open/:trackingID", controllers.TrackOpenHandler)
+
+		// activity notifications
+		protected.POST("/notifications", controllers.CreateNotification)
+		protected.GET("/notifications", controllers.GetNotifications)
 	}
 
 	return router
