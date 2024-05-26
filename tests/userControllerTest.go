@@ -1,5 +1,5 @@
 // user_controller_test.go
-package controllers_test
+package tests
 
 import (
 	"bytes"

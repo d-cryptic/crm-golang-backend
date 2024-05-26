@@ -1,5 +1,5 @@
 // rate_limit_middleware_test.go
-package middleware
+package tests
 
 import (
 	"net/http"
