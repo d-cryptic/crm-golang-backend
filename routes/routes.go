@@ -12,6 +12,7 @@ func SetupRouter() *gin.Engine {
 
 	router.POST("/register", controllers.CreateUser)
 	router.POST("/login", controllers.LoginUser)
+	router.Use(middleware.RateLimiter())
 
 	protected := router.Group("/admin")
 	protected.Use(middleware.AuthMiddleware())
