@@ -1,12 +1,13 @@
 package routes
 
 import (
-	"github.com/gin-gonic/gin"
 	"github.com/d-cryptic/crm-golang-backend/controllers"
 	"github.com/d-cryptic/crm-golang-backend/middleware"
+	"github.com/gin-gonic/gin"
 )
 
 func SetupRouter() *gin.Engine {
+
 	router := gin.Default()
 
 	router.POST("/register", controllers.CreateUser)
@@ -31,8 +32,8 @@ func SetupRouter() *gin.Engine {
     	protected.GET("/reports/customer-interactions", controllers.GenerateCustomerInteractionsReport)
 
 		// Email endpoints
-    	protected.POST("/send-email", controllers.SendEmail)
-    	protected.GET("/track/open", controllers.TrackOpen)
+    	protected.POST("/send-email", controllers.SendEmailHandler)
+    	protected.GET("/track/open/:trackingID", controllers.TrackOpenHandler)
 	}
 
 	return router
