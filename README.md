@@ -6,6 +6,34 @@ This CRM (Customer Relationship Management) backend system is designed to handle
 
 ---
 
+## Hosted Link
+- [Live](http://67.205.140.148:8080/)
+
+---
+
+## API Design
+
+```
+ POST   /register               
+ POST   /login                   
+ GET    /admin/users             
+ GET    /admin/users/:id         
+ PUT    /admin/users/:id         
+ DELETE /admin/users/:id         
+ POST   /admin/tickets            
+ POST   /admin/tickets            
+ PUT    /admin/tickets/:id/resolve 
+ POST   /admin/interactions       
+ GET    /admin/interactions/customer/:customer_id 
+ GET    /admin/reports/customer-interactions 
+ POST   /admin/send-email         
+ GET    /admin/track/open/:trackingID 
+ POST   /admin/notifications      
+ GET    /admin/notifications      
+```
+
+---
+
 ## Database Schema Design
 
 ### Collections
