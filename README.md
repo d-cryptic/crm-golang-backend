@@ -8,6 +8,7 @@ This CRM (Customer Relationship Management) backend system is designed to handle
 
 ## Hosted Link
 - [Live](http://67.205.140.148:8080/)
+- [API Documentation hosted link](https://documenter.getpostman.com/view/14938340/2sA3Qs9BmN)
 
 ---
 
